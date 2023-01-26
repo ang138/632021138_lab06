@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab06/services/auth_service.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -38,6 +39,12 @@ class _RegisterPageState extends State<RegisterPage> {
     return ElevatedButton(onPressed: () {
               if(_formKey.currentState!.validate()){
                 print("Ok");
+                print(_emailController.text);
+                AuthService.registerUser(_emailController.text, _passwordController.text).then((value) {
+                  if (value == 1) {
+                    Navigator.pop(context);
+                  }
+                });
               }
             }, child: const Text("Register"));
   }
